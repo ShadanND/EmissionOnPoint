@@ -38,14 +38,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 const provinceData = {
-  ON: {
+  Ontario: {
     name: "Ontario",
     dataSources: [
       { name: "Petrolia Mobile Measurements", type: "mobile", duration: "2023-2024", provider: "Petrolia Enviro", location: [42.8845, -82.1490] },
       { name: "Petrolia Stationary Sensor", type: "stationary", duration: "2023-2024", provider: "Petrolia Enviro", location: [42.8850, -82.1500] }
     ]
   },
-  AB: {
+  Alberta: {
     name: "Alberta",
     dataSources: [
       { name: "Medicine Hat Mobile Measurements", type: "mobile", duration: "2020-2024", provider: "Medicine Hat Climate Center", location: [50.0417, -110.6766] },
@@ -73,8 +73,7 @@ fetch('./canada_provinces.geo.json')
         layer.on('mouseover', () => {
           layer.setStyle({ fillOpacity: 0.5 });
           const provName = feature.properties.name || '';
-          const provCode = provName.toUpperCase().substring(0,2);
-          showProvinceInfo(provCode);
+          showProvinceInfo(provName);
         });
         layer.on('mouseout', () => {
           layer.setStyle({ fillOpacity: 0.2 });
@@ -85,9 +84,9 @@ fetch('./canada_provinces.geo.json')
     addDataSources();
   });
 
-function showProvinceInfo(code) {
+function showProvinceInfo(name) {
   const info = document.getElementById('province-info');
-  const province = provinceData[code];
+  const province = provinceData[name];
   if (!province) {
     info.style.display = 'none';
     return;
@@ -105,8 +104,8 @@ function showProvinceInfo(code) {
 }
 
 function addDataSources() {
-  Object.keys(provinceData).forEach(code => {
-    const prov = provinceData[code];
+  Object.keys(provinceData).forEach(name => {
+    const prov = provinceData[name];
     prov.dataSources.forEach(src => {
       const marker = L.circleMarker(src.location, {
         radius: 6,
