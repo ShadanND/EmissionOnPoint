@@ -1,4 +1,4 @@
-<!-- File: canada_methane_dashboard.html -->
+<!-- File: index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +8,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <style>
     html, body { height: 100%; margin: 0; }
-    #canada-map { height: 90vh; }
-    .province-info { position: absolute; top: 10px; right: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); max-width: 300px; display: none; z-index: 1000; }
+    #header { background: #34495e; color: white; padding: 10px; text-align: center; position: relative; }
+    #header img { position: absolute; left: 10px; top: 5px; height: 40px; }
+    #canada-map { height: 85vh; }
+    .province-info { position: absolute; top: 60px; right: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); width: 300px; display: none; z-index: 1000; }
     .province-info h3 { margin-top: 0; }
     .map-legend { position: absolute; bottom: 10px; left: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); z-index: 1000; }
   </style>
 </head>
-
 <body>
+
+<div id="header">
+  <img src="logo.png" alt="Logo">
+  <h1>Canadian Methane Measurement Dashboard</h1>
+</div>
+
 <div id="canada-map"></div>
 <div class="province-info" id="province-info">
   <h3 id="province-name">Province</h3>
@@ -106,7 +113,7 @@ function addDataSources() {
         color: src.type === 'mobile' ? '#e74c3c' : '#3498db',
         fillOpacity: 0.8
       }).addTo(map);
-      marker.bindPopup(`<strong>${src.name}</strong><br>${src.provider}<br>${src.duration}`);
+      marker.bindPopup(`<strong>${prov.name}</strong><br>${src.name}<br>${src.provider}<br>${src.duration}`);
     });
   });
 }
