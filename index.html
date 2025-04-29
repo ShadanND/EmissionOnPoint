@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <style>
     html, body { height: 100%; margin: 0; overflow-x: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    /* Header Styles */
     #header { background: linear-gradient(90deg, #34495e, #2c3e50); color: white; padding: 20px 10px; text-align: center; position: relative; box-shadow: 0 4px 8px rgba(0,0,0,0.3); font-size: 1.5rem; }
     #hamburger { position: absolute; left: 15px; top: 15px; font-size: 28px; cursor: pointer; user-select: none; background: rgba(255, 255, 255, 0.1); padding: 8px 12px; border-radius: 50%; transition: background 0.3s; }
     #hamburger:hover { background: rgba(255, 255, 255, 0.3); }
@@ -16,10 +15,10 @@
     .province-info { position: absolute; top: 60px; right: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); width: 300px; display: none; z-index: 1000; }
     .province-info h3 { margin-top: 0; }
     .map-legend { position: absolute; bottom: 10px; left: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); z-index: 1000; }
-    /* Left Ribbon Styles */
+
     #left-ribbon { position: fixed; top: 0; left: -220px; width: 220px; height: 100%; background: rgba(44, 62, 80, 0.8); backdrop-filter: blur(10px); color: white; transition: left 0.4s ease; z-index: 1500; padding: 20px 10px; box-sizing: border-box; box-shadow: 2px 0 10px rgba(0,0,0,0.5); }
-    #left-ribbon img { width: 100%; margin-bottom: 20px; transition: transform 0.3s; }
-    #left-ribbon img:hover { transform: scale(1.05); }
+    #left-ribbon img { width: 100%; margin-bottom: 20px; transition: transform 0.4s, box-shadow 0.4s; border-radius: 8px; }
+    #left-ribbon img:hover { transform: scale(1.08); box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
     .layer-option { background: rgba(255, 255, 255, 0.1); margin: 12px 0; padding: 10px; text-align: center; border-radius: 8px; cursor: pointer; user-select: none; backdrop-filter: blur(5px); transition: background 0.3s, transform 0.2s; }
     .layer-option:hover { background: rgba(255, 255, 255, 0.3); transform: translateX(5px); }
     #left-ribbon a { display: block; }
@@ -33,8 +32,12 @@
 
 <div id="left-ribbon">
   <img src="logo.png" alt="Logo 1">
-  <a href="https://climatheca.com/" target="_blank"><img src="partner-logo2.png" alt="Logo 2"></a>
-  <a href="https://fluxlab.ca/" target="_blank"><img src="partner-logo.png" alt="Logo 3"></a>
+  <a href="https://climatheca.com/" target="_blank" title="View Climatheca">
+    <img src="partner-logo2.png" alt="Climatheca Logo">
+  </a>
+  <a href="https://fluxlab.ca/" target="_blank" title="View Fluxlab">
+    <img src="partner-logo.png" alt="Fluxlab Logo">
+  </a>
   <div class="layer-option">Wind</div>
   <div class="layer-option">Heat Maps</div>
   <div class="layer-option">Emissions</div>
