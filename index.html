@@ -9,7 +9,14 @@
   <style>
     html, body { height: 100%; margin: 0; overflow-x: hidden; }
     #header { background: #34495e; color: white; padding: 10px; text-align: center; position: relative; }
-    #header img { position: absolute; left: 10px; top: 5px; height: 40px; }
+    #hamburger {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+    }
     #canada-map { height: 85vh; }
     .province-info { position: absolute; top: 60px; right: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); width: 300px; display: none; z-index: 1000; }
     .province-info h3 { margin-top: 0; }
@@ -53,7 +60,7 @@
 <body>
 
 <div id="header">
-  <img src="logo.png" alt="Logo">
+  <div id="hamburger">☰</div>
   <h1>EmissionOnPoint — Linking You to Environmental Intelligence</h1>
 </div>
 
@@ -160,14 +167,14 @@ function addDataSources() {
   });
 }
 
-// Ribbon sliding logic
+// Ribbon toggle logic
 const ribbon = document.getElementById('left-ribbon');
-document.addEventListener('mousemove', function(e) {
-  if (e.clientX < 30) {
-    ribbon.style.left = '0';
-  } else if (e.clientX > 220) {
-    ribbon.style.left = '-200px';
-  }
+const hamburger = document.getElementById('hamburger');
+let ribbonOpen = false;
+
+hamburger.addEventListener('click', () => {
+  ribbonOpen = !ribbonOpen;
+  ribbon.style.left = ribbonOpen ? '0' : '-200px';
 });
 </script>
 
