@@ -112,7 +112,7 @@ function addDataSources() {
         color: src.type === 'mobile' ? '#e74c3c' : '#3498db',
         fillOpacity: 0.8
       }).addTo(map);
-      marker.bindPopup(`<strong>${prov.name}</strong><br>${src.name}<br>${src.provider}<br>${src.duration}`);
+      marker.bindPopup(`<strong>${src.name}</strong><br>Type: ${src.type}<br>Provider: ${src.provider}<br>Duration: ${src.duration}`);
     });
   });
 }
