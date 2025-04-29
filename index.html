@@ -8,9 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <style>
     html, body { height: 100%; margin: 0; overflow-x: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    #header { background: linear-gradient(90deg, #34495e, #2c3e50); color: white; padding: 20px 10px; text-align: center; position: relative; box-shadow: 0 4px 20px rgba(0,0,0,0.6); font-size: 1.5rem; animation: pulse 3s infinite; }
-    #header h1 { transition: text-shadow 0.3s ease; }
-    #header h1:hover { text-shadow: 0 0 8px rgba(255,255,255,0.8); }
 
     @keyframes pulse {
       0% { box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
@@ -18,7 +15,38 @@
       100% { box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
     }
 
-    #hamburger { position: absolute; left: 15px; top: 15px; font-size: 28px; cursor: pointer; user-select: none; background: rgba(255, 255, 255, 0.1); padding: 8px 12px; border-radius: 50%; transition: background 0.3s, transform 0.4s; }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    #header {
+      background: linear-gradient(270deg, #3498db, #e67e22, #3498db);
+      background-size: 600% 600%;
+      animation: gradientShift 10s ease infinite, pulse 3s infinite;
+      color: white;
+      padding: 20px 10px;
+      text-align: center;
+      position: relative;
+      font-size: 1.5rem;
+    }
+
+    #header h1 { transition: text-shadow 0.3s ease; }
+    #header h1:hover { text-shadow: 0 0 8px rgba(255,255,255,0.8); }
+
+    #hamburger {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      font-size: 28px;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 12px;
+      border-radius: 50%;
+      transition: background 0.3s, transform 0.4s;
+    }
     #hamburger:hover { background: rgba(255, 255, 255, 0.3); transform: rotate(20deg); }
 
     #canada-map { height: 85vh; }
@@ -26,11 +54,40 @@
     .province-info h3 { margin-top: 0; }
     .map-legend { position: absolute; bottom: 10px; left: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); z-index: 1000; }
 
-    #left-ribbon { position: fixed; top: 0; left: -220px; width: 220px; height: 100%; background: rgba(44, 62, 80, 0.8); backdrop-filter: blur(10px); color: white; transition: left 0.4s ease; z-index: 1500; padding: 20px 10px; box-sizing: border-box; box-shadow: 2px 0 10px rgba(0,0,0,0.5); }
+    #left-ribbon {
+      position: fixed;
+      top: 0;
+      left: -220px;
+      width: 220px;
+      height: 100%;
+      background: linear-gradient(270deg, #3498db, #e67e22, #3498db);
+      background-size: 600% 600%;
+      animation: gradientShift 10s ease infinite;
+      backdrop-filter: blur(10px);
+      color: white;
+      transition: left 0.4s ease;
+      z-index: 1500;
+      padding: 20px 10px;
+      box-sizing: border-box;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+    }
+
     #left-ribbon img { width: 100%; margin-bottom: 20px; transition: transform 0.4s, box-shadow 0.4s; border-radius: 8px; }
     #left-ribbon img:hover { transform: scale(1.08); box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
-    .layer-option { background: rgba(255, 255, 255, 0.1); margin: 12px 0; padding: 10px; text-align: center; border-radius: 8px; cursor: pointer; user-select: none; backdrop-filter: blur(5px); transition: background 0.3s, transform 0.2s; }
+
+    .layer-option {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 12px 0;
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      backdrop-filter: blur(5px);
+      transition: background 0.3s, transform 0.2s;
+    }
     .layer-option:hover { background: rgba(255, 255, 255, 0.3); transform: translateX(5px); }
+
     #left-ribbon a { display: block; }
   </style>
 </head>
