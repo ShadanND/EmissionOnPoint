@@ -7,64 +7,177 @@
   <title>EmissionOnPoint — Linking You to Environmental Intelligence</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <style>
-    html, body { height: 100%; margin: 0; overflow-x: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow-x: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
     /* Header Styles */
-    #header { background: linear-gradient(90deg, #34495e, #2c3e50); color: white; padding: 20px 10px; text-align: center; position: relative; box-shadow: 0 4px 8px rgba(0,0,0,0.3); font-size: 1.5rem; }
-    #hamburger { position: absolute; left: 15px; top: 15px; font-size: 28px; cursor: pointer; user-select: none; background: rgba(255, 255, 255, 0.1); padding: 8px 12px; border-radius: 50%; transition: background 0.3s; }
-    #hamburger:hover { background: rgba(255, 255, 255, 0.3); }
+    #header {
+      background: linear-gradient(90deg, #2c3e50, #34495e, #2c3e50);
+      color: white;
+      padding: 30px 10px 50px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      font-size: 1.75rem;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      background-size: 200% 200%;
+      animation: headerGlow 6s ease infinite;
+    }
+
+    #header h1 {
+      margin: 0;
+      text-shadow: 1px 2px 4px rgba(0,0,0,0.6);
+      font-weight: bold;
+    }
+
+    #header p {
+      margin: 10px 0 0;
+      font-size: 1rem;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.8);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 2s ease-in-out 0.5s forwards;
+      opacity: 0;
+    }
+
+    @keyframes headerGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    #hamburger {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      font-size: 28px;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 10px 14px;
+      border-radius: 50%;
+      transition: all 0.3s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    #hamburger:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+    }
+
     #canada-map { height: 85vh; }
-    .province-info { position: absolute; top: 60px; right: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); width: 300px; display: none; z-index: 1000; }
+
+    .province-info {
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      width: 300px;
+      display: none;
+      z-index: 1000;
+    }
+
     .province-info h3 { margin-top: 0; }
-    .map-legend { position: absolute; bottom: 10px; left: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); z-index: 1000; }
+
+    .map-legend {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+
     /* Left Ribbon Styles */
-    #left-ribbon { position: fixed; top: 0; left: -220px; width: 220px; height: 100%; background: rgba(44, 62, 80, 0.8); backdrop-filter: blur(10px); color: white; transition: left 0.4s ease; z-index: 1500; padding: 20px 10px; box-sizing: border-box; box-shadow: 2px 0 10px rgba(0,0,0,0.5); }
-    #left-ribbon img { width: 100%; margin-bottom: 20px; transition: transform 0.3s; }
-    #left-ribbon img:hover { transform: scale(1.05); }
-    .layer-option { background: rgba(255, 255, 255, 0.1); margin: 12px 0; padding: 10px; text-align: center; border-radius: 8px; cursor: pointer; user-select: none; backdrop-filter: blur(5px); transition: background 0.3s, transform 0.2s; }
-    .layer-option:hover { background: rgba(255, 255, 255, 0.3); transform: translateX(5px); }
-    #left-ribbon a { display: block; }
+    #left-ribbon {
+      position: fixed;
+      top: 0;
+      left: -220px;
+      width: 220px;
+      height: 100%;
+      background: rgba(44, 62, 80, 0.8);
+      backdrop-filter: blur(10px);
+      color: white;
+      transition: left 0.4s ease;
+      z-index: 1500;
+      padding: 20px 10px;
+      box-sizing: border-box;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+    }
+
+    #left-ribbon img {
+      width: 100%;
+      margin-bottom: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    #left-ribbon img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(255,255,255,0.7);
+    }
+
+    .layer-option {
+      background: rgba(255, 255, 255, 0.1);
+      margin: 12px 0;
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      backdrop-filter: blur(5px);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .layer-option:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateX(5px);
+    }
+
+    #left-ribbon a {
+      display: block;
+      position: relative;
+    }
+
+    #left-ribbon a::after {
+      content: attr(title);
+      position: absolute;
+      left: 110%;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    #left-ribbon a:hover::after {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
-<div id="header">
-  <div id="hamburger">☰</div>
-  <h1>EmissionOnPoint — Linking You to Environmental Intelligence</h1>
-</div>
-
-<div id="left-ribbon">
-  <img src="logo.png" alt="Logo 1">
-  <a href="https://climatheca.com/" target="_blank"><img src="partner-logo2.png" alt="Logo 2"></a>
-  <a href="https://fluxlab.ca/" target="_blank"><img src="partner-logo.png" alt="Logo 3"></a>
-  <div class="layer-option">Wind</div>
-  <div class="layer-option">Heat Maps</div>
-  <div class="layer-option">Emissions</div>
-</div>
-
-<div id="canada-map"></div>
-<div class="province-info" id="province-info">
-  <h3 id="province-name">Province</h3>
-  <div id="data-summary"></div>
-  <div id="data-sources"></div>
-  <button onclick="document.getElementById('province-info').style.display='none'">Close</button>
-</div>
-<div class="map-legend">
-  <div><span style="background:#e74c3c;width:12px;height:12px;display:inline-block;margin-right:5px;"></span>Mobile</div>
-  <div><span style="background:#3498db;width:12px;height:12px;display:inline-block;margin-right:5px;"></span>Stationary</div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script>
-const provinceData = { Ontario: { name: "Ontario", dataSources: [ { name: "Petrolia Mobile Measurements", type: "mobile", duration: "2023-2024", provider: "STFX-FluxLab", location: [42.8845, -82.1490] }, { name: "Petrolia Stationary Sensor", type: "stationary", duration: "2023-2024", provider: "STFX-FluxLab", location: [42.8850, -82.1500] } ] }, Alberta: { name: "Alberta", dataSources: [ { name: "Medicine Hat Mobile Measurements", type: "mobile", duration: "2020-2024", provider: "STFX-FluxLab", location: [50.0417, -110.6766] }, { name: "Medicine Hat Stationary Sensor", type: "stationary", duration: "2020-2024", provider: "STFX-FluxLab", location: [50.0400, -110.6750] } ] } };
-const map = L.map('canada-map').setView([56.1304, -106.3468], 4);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
-fetch('./canada_provinces.geo.json')
-  .then(response => response.json())
-  .then(geojsonData => { const geojsonLayer = L.geoJSON(geojsonData, { style: { color: "#34495e", weight: 1, fillOpacity: 0.2 }, onEachFeature: (feature, layer) => { layer.on('mouseover', () => { layer.setStyle({ fillOpacity: 0.5 }); const provName = feature.properties.name || ''; showProvinceInfo(provName); }); layer.on('mouseout', () => { layer.setStyle({ fillOpacity: 0.2 }); }); } }).addTo(map); addDataSources(); });
-function showProvinceInfo(name) { const info = document.getElementById('province-info'); const province = provinceData[name]; if (!province) { info.style.display = 'none'; return; } document.getElementById('province-name').innerText = province.name; document.getElementById('data-summary').innerText = ${province.dataSources.length} data sources; const sourcesDiv = document.getElementById('data-sources'); sourcesDiv.innerHTML = ''; province.dataSources.forEach(src => { const div = document.createElement('div'); div.innerHTML = <strong>${src.name}</strong><br>Type: ${src.type}<br>Duration: ${src.duration}<br>Provider: ${src.provider}; sourcesDiv.appendChild(div); }); info.style.display = 'block'; }
-function addDataSources() { Object.keys(provinceData).forEach(name => { const prov = provinceData[name]; prov.dataSources.forEach(src => { const marker = L.circleMarker(src.location, { radius: 6, color: src.type === 'mobile' ? '#e74c3c' : '#3498db', fillOpacity: 0.8 }).addTo(map); marker.bindPopup(<strong>${src.name}</strong><br>Type: ${src.type}<br>Provider: ${src.provider}<br>Duration: ${src.duration}); }); }); }
-const ribbon = document.getElementById('left-ribbon');
-const hamburger = document.getElementById('hamburger');
-let ribbonOpen = false;
-hamburger.addEventListener('click', () => { ribbonOpen = !ribbonOpen; ribbon.style.left = ribbonOpen ? '0' : '-220px'; });
-</script>
+  <div id="header">
+    <div id="hamburger">☰</div>
+    <h1>EmissionOnPoint — Linking You to Environmental Intelligence</h1>
+    <p>Environmental Data at Your Fingertips</p>
+  </div>
 </body>
 </html>
