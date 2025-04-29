@@ -7,13 +7,47 @@
   <title>EmissionOnPoint — Linking You to Environmental Intelligence</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <style>
-    html, body { height: 100%; margin: 0; }
+    html, body { height: 100%; margin: 0; overflow-x: hidden; }
     #header { background: #34495e; color: white; padding: 10px; text-align: center; position: relative; }
     #header img { position: absolute; left: 10px; top: 5px; height: 40px; }
     #canada-map { height: 85vh; }
     .province-info { position: absolute; top: 60px; right: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); width: 300px; display: none; z-index: 1000; }
     .province-info h3 { margin-top: 0; }
     .map-legend { position: absolute; bottom: 10px; left: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); z-index: 1000; }
+
+    /* Ribbon styles */
+    #left-ribbon {
+      position: fixed;
+      top: 0;
+      left: -200px;
+      width: 200px;
+      height: 100%;
+      background-color: #2c3e50;
+      color: white;
+      transition: left 0.3s ease;
+      z-index: 1500;
+      padding: 20px 10px;
+      box-sizing: border-box;
+    }
+
+    #left-ribbon img {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .layer-option {
+      background: #3498db;
+      margin: 10px 0;
+      padding: 8px;
+      text-align: center;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .layer-option:hover {
+      background: #2980b9;
+    }
   </style>
 </head>
 <body>
@@ -21,6 +55,15 @@
 <div id="header">
   <img src="logo.png" alt="Logo">
   <h1>EmissionOnPoint — Linking You to Environmental Intelligence</h1>
+</div>
+
+<div id="left-ribbon">
+  <img src="logo.png" alt="Logo 1">
+  <img src="partner-logo2.png" alt="Logo 2">
+  <img src="partner-logo.png" alt="Logo 3">
+  <div class="layer-option">Wind</div>
+  <div class="layer-option">Heat Maps</div>
+  <div class="layer-option">Emissions</div>
 </div>
 
 <div id="canada-map"></div>
@@ -116,6 +159,17 @@ function addDataSources() {
     });
   });
 }
+
+// Ribbon sliding logic
+const ribbon = document.getElementById('left-ribbon');
+document.addEventListener('mousemove', function(e) {
+  if (e.clientX < 30) {
+    ribbon.style.left = '0';
+  } else if (e.clientX > 220) {
+    ribbon.style.left = '-200px';
+  }
+});
 </script>
+
 </body>
 </html>
