@@ -9,7 +9,8 @@
   <style>
     html, body { height: 100%; margin: 0; }
     #header { background: #34495e; color: white; padding: 10px; text-align: center; position: relative; }
-    #header img { position: absolute; left: 10px; top: 5px; height: 40px; }
+    #header img.left-logo { position: absolute; left: 10px; top: 5px; height: 40px; }
+    #header img.right-logo { position: absolute; right: 10px; top: 5px; height: 40px; }
     #canada-map { height: 85vh; }
     .province-info { position: absolute; top: 60px; right: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); width: 300px; display: none; z-index: 1000; }
     .province-info h3 { margin-top: 0; }
@@ -19,8 +20,9 @@
 <body>
 
 <div id="header">
-  <img src="logo.png" alt="Logo">
-  <h1>EmissionOnPoint — Linking You to Environmental Intelligence</h1>
+  <img src="logo.png" alt="Logo" class="left-logo">
+  <h1>Linking You to Environmental Intelligence</h1>
+  <img src="partner-logo.png" alt="Partner Logo" class="right-logo">
 </div>
 
 <div id="canada-map"></div>
