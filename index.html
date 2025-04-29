@@ -8,9 +8,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <style>
     html, body { height: 100%; margin: 0; overflow-x: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    #header { background: linear-gradient(90deg, #34495e, #2c3e50); color: white; padding: 20px 10px; text-align: center; position: relative; box-shadow: 0 4px 8px rgba(0,0,0,0.3); font-size: 1.5rem; }
-    #hamburger { position: absolute; left: 15px; top: 15px; font-size: 28px; cursor: pointer; user-select: none; background: rgba(255, 255, 255, 0.1); padding: 8px 12px; border-radius: 50%; transition: background 0.3s; }
-    #hamburger:hover { background: rgba(255, 255, 255, 0.3); }
+    #header { background: linear-gradient(90deg, #34495e, #2c3e50); color: white; padding: 20px 10px; text-align: center; position: relative; box-shadow: 0 4px 20px rgba(0,0,0,0.6); font-size: 1.5rem; animation: pulse 3s infinite; }
+    #header h1 { transition: text-shadow 0.3s ease; }
+    #header h1:hover { text-shadow: 0 0 8px rgba(255,255,255,0.8); }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
+      50% { box-shadow: 0 4px 30px rgba(0,0,0,0.8); }
+      100% { box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
+    }
+
+    #hamburger { position: absolute; left: 15px; top: 15px; font-size: 28px; cursor: pointer; user-select: none; background: rgba(255, 255, 255, 0.1); padding: 8px 12px; border-radius: 50%; transition: background 0.3s, transform 0.4s; }
+    #hamburger:hover { background: rgba(255, 255, 255, 0.3); transform: rotate(20deg); }
+
     #canada-map { height: 85vh; }
     .province-info { position: absolute; top: 60px; right: 10px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.3); width: 300px; display: none; z-index: 1000; }
     .province-info h3 { margin-top: 0; }
